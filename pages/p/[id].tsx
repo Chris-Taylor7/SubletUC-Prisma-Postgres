@@ -3,22 +3,37 @@ import { GetServerSideProps } from "next"
 import ReactMarkdown from "react-markdown"
 import Layout from "../../components/Layout"
 import { PostProps } from "../../components/Post"
+import prisma from '../../lib/prisma';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const post = {
-    id: "1",
-    title: "Prisma is the perfect ORM for Next.js",
-    content: "[Prisma](https://github.com/prisma/prisma) and Next.js go _great_ together!",
-    published: false,
-    author: {
-      name: "Nikolas Burk",
-      email: "burk@prisma.io",
+  const id = Number(params?.id);
+
+  if (isNaN(id)) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const listing = await prisma.listing.findUnique({
+    where: { id },
+    include: {
+      user: {
+        select: { fullName: true },
+      },
+      roommates: true,
     },
+  });
+
+  if (!listing) {
+    return {
+      notFound: true,
+    };
   }
+
   return {
-    props: post,
-  }
-}
+    props: { listing },
+  };
+};
 
 const Post: React.FC<PostProps> = (props) => {
   let title = props.title
