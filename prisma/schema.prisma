@@ -11,31 +11,69 @@ datasource db {
 }
 
 model User {
-  id           String     @id @default(cuid())
-  name         String?
-  email        String?    @unique
+  id           Int        @id @default(autoincrement())
+  fullName     String?
+  username     String     @unique
+  email        String     @unique
+  isActive     Boolean    @default(true)
+  createdBy    String?
+  updatedBy    String?
   createdAt    DateTime   @default(now()) @map(name: "created_at")
   updatedAt    DateTime   @updatedAt @map(name: "updated_at")
 
-  // One-to-many relationship: One user can create many listings
+  // Listings created by the user
   listings     Listing[] 
 
-  // Many-to-many relationship: Favorited listings
-  favorited    Listing[]  @relation("UserFavorites")
+  // Bookmarked listings (many-to-many)
+  favorited    Listing[]  @relation("UserBookmarks")
 
   @@map(name: "users")
 }
 
 model Listing {
-  id           String     @id @default(cuid())
-  firstName    String
-  lastName     String
-  address      String
+  id                       Int        @id @default(autoincrement())
+  address                  String?
+  rent                     Decimal
+  availability             String?
+  bedrooms                 Int
+  bathrooms                Int
+  description              String?
+  utilitiesIncludedInRent  Boolean
+  averageUtilities         Decimal
+  sharedRoom               Boolean
+  sharedRoommates          Int
+  catsAndDogsAllowed       Boolean
+  washerDryer              Boolean
+  offStreetParking         Boolean
+  driveway                 Boolean
+  distanceFromCampus       Decimal
+  notes                    String?
+  photo                    Bytes?
+  active                   Boolean    @default(true)
 
-  // Creator of the listing
-  user         User       @relation(fields: [userId], references: [id])
-  userId       String
+  // Foreign key to User
+  userId                   Int
+  user                     User       @relation(fields: [userId], references: [id])
 
-  // Users who favorited this listing
-  favoritedBy  User[]     @relation("UserFavorites")
+  // Users who bookmarked this listing
+  favoritedBy              User[]     @relation("UserBookmarks")
+
+  // Related roommates
+  roommates                Roommate[]
+}
+
+model Roommate {
+  id           Int      @id @default(autoincrement())
+  year         Int?
+  gender       Gender
+
+  // Foreign key to Listing
+  listingId    Int
+  listing      Listing  @relation(fields: [listingId], references: [id])
+}
+
+enum Gender {
+  Male
+  Female
+  Non_Binary
 }
