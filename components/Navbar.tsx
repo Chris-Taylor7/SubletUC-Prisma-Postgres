@@ -32,35 +32,35 @@ export default function Navbar() {
             </Button>
           </Link>
 
-          <Link href="../pages/create-listing" passHref>
+          <Link href="./pages/create-listing" passHref>
             <Button variant="gradient"
       gradient={{ from: 'rgba(3, 1, 1, 1)', to: 'red', deg: 0 }} size="compact-lg"  onClick={close}>
               Create a Listing
             </Button>
           </Link> 
 
-          <Link href="../pages/view-listings" passHref>
+          <Link href="./pages/view-listings" passHref>
             <Button variant="gradient"
       gradient={{ from: 'rgba(3, 1, 1, 1)', to: 'red', deg: 0 }} size="compact-lg"  onClick={close}>
               View Available Listings
             </Button>
           </Link>
 
-          <Link href="../pages/messages" passHref>
+          <Link href="./pages/messages" passHref>
             <Button variant="gradient"
       gradient={{ from: 'rgba(3, 1, 1, 1)', to: 'red', deg: 0 }} size="compact-lg"  onClick={close}>
               Messages
             </Button>
           </Link>
 
-          <Link href="../pages/bookmarks" passHref>
+          <Link href="./pages/bookmarks" passHref>
             <Button variant="gradient"
       gradient={{ from: 'rgba(3, 1, 1, 1)', to: 'red', deg: 0 }} size="compact-lg"   onClick={close}>
               <FaBookmark />
             </Button>
           </Link>
 
-          <Link href="../pages/profile" passHref>
+          <Link href="./pages/profile" passHref>
             <Avatar variant="filled" radius="lg" color="red" src="" onClick={close} />
           </Link>
 

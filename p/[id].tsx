@@ -1,8 +1,6 @@
-import React from "react"
 import { GetServerSideProps } from "next"
-import ReactMarkdown from "react-markdown"
-import Layout from "../components/Layout"
-import prisma from '../lib/prisma';
+import prisma from "../lib/prisma";
+
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = Number(params?.id);

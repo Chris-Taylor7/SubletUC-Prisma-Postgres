@@ -1,5 +1,6 @@
 import '@mantine/core/styles.css';
 import { MantineProvider, mantineHtmlProps } from '@mantine/core';
+import Navbar from '../components/Navbar';
 
 export const metadata = {
   title: 'My Mantine app',
@@ -11,13 +12,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en" {...mantineHtmlProps}>      
-      <body>
+  return (      
+      <div {...mantineHtmlProps}>
         <MantineProvider>
           {children}
         </MantineProvider>
-      </body>
-    </html>
+      </div>
   );
 }
