@@ -1,22 +1,23 @@
-'use client'
+import '@mantine/core/styles.css';
+import { MantineProvider, mantineHtmlProps } from '@mantine/core';
 
-import React, { ReactNode } from "react";
-import { SessionProvider } from "next-auth/react";
-import Header from "./Header";
-
-type Props = {
-  children: ReactNode;
+export const metadata = {
+  title: 'My Mantine app',
+  description: 'I have followed setup instructions carefully',
 };
 
-const Layout: React.FC<Props> = ({ children }) => (
-  <div>
-    <body>
-      <SessionProvider>
-        <Header />
-        <div className="layout">{children}</div>
-      </SessionProvider>
-    </body>
-  </div>
-);
-
-export default Layout;
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" {...mantineHtmlProps}>      
+      <body>
+        <MantineProvider>
+          {children}
+        </MantineProvider>
+      </body>
+    </html>
+  );
+}
