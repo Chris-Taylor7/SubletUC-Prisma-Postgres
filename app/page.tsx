@@ -8,6 +8,7 @@ export default function HomePage() {
         <Layout>
           <Navbar />
           <div>Welcome to the home page!</div>
+          <div>HELLOW WORLD!</div>
         </Layout>
       </body>
     </html>
